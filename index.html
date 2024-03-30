@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Web socket</title>
+</head>
+<body>
+    <h1>Web socket</h1>
+    <button id="hello-button">Send Hello</button>
+    <script>
+        const socket = new WebSocket("ws://localhost:5001");
+        socket.onopen = ((event) => {
+            console.log(event);
+        })
+
+        setTimeout(() => {
+            socket.send("Hello")
+        }, 1000)
+        setTimeout(() => {
+            socket.send("I'm fine")
+        }, 2000)
+        setTimeout(() => {
+        socket.send("How are you?")
+        }, 6000)
+        document.getElementById("hello-button").addEventListener("click", (() => {
+            socket.send("Hello")
+        }))
+
+        socket.onmessage = ((message) => {
+            console.log(message)
+        })
+    </script> 
+</body>
+</html>
